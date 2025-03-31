@@ -7,9 +7,8 @@
 #    Then I see the lattitute and longuitude of the Restaurant
 
 
-
  Feature: Searching for nearest restaurants and getting details
   Scenario: Search for nearest restaurants and get details
     Given The Google Map Application is open
-    When I search for nearest restaurants
-    Then I should able to get the details of each Restaurant
+    When I search for nearest Restaurants
+    Then I should able to open and get the details of each Restaurant
