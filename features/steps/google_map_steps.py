@@ -5,7 +5,7 @@ from playwright.sync_api import sync_playwright
 
 playwright_start = sync_playwright().start()
 browser = playwright_start.chromium.launch(headless=False)
-tab = browser.new_context()
+tab = browser.new_context(viewport={ 'width': 1890, 'height': 920 })
 page = tab.new_page()
 
 Locators={"name":"(//div[@role='tablist']//preceding::h1)[3]",
@@ -54,9 +54,10 @@ def search_nearest_restaurant(context):
 def open_first_one(context):
     result_list = []
     element = 1
+
     try:
         while len(result_list) <= 20:
-            restaurant_container = page.wait_for_selector(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]")
+            restaurant_container = page.locator(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]")
 
             # page.wait_for_selector(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]").click()
             if restaurant_container.is_visible():
@@ -66,10 +67,10 @@ def open_first_one(context):
                 details["longuitude"] = get_coordinates()[1]
 
                 result_list.append(details)
-                for_timeout(1000)
+                for_timeout(3000)
                 element+=1
             else:
-                page.wait_for_selector(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]").scroll_into_view_if_needed()
+                page.locator(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]").scroll_into_view_if_needed()
 
 
         dataframe = pd.DataFrame(result_list)
