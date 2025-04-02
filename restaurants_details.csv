@@ -1,4 +1,6 @@
-Name,Rating,Location,Number,Latitude,Longitude
-CoalSpark Restaurant,4.5,"Gachibowli - Miyapur Rd, opp. Platina Mall, Banjara Basthi, Anjaiah Nagar, Gachibowli, Hyderabad, Telangana 500084",096038 44449,17.4544546,78.3549491
-CoalSpark Restaurant,4.2,"3rd Floor Ektha pearl, Gachibowli - Miyapur Road opp:Sarath City Capital Mall, kothaguda, Kondapur, Hyderabad, Telangana 500084",Find a table,17.4498809,78.3461605
-Platform 65 - The Train Theme Restaurant,4.3,"plot no:25, Jayabheri Enclave, Gachibowli, Hyderabad, Telangana 500032",Find a table,17.4498809,78.3461605
+name,rating,location,number,lattitude,longuitude
+Alex's Kitchen,4.0,"Anasuya Complex, Ground Floor, 3-6-10, Liberty Rd, Himayatnagar, Hyderabad, Telangana 500029",086886 46434,17.4011041,78.4537587
+Swathi Veg Restaurant,4.0,"3-5-869 To 872, Hyderguda-Basheerbagh Rd, Near Apollo Hospitals, Old MLA Quarters, King Koti, Hyderguda, Hyderabad, Telangana 500029",040 2323 0741,17.4011041,78.4537587
+Swathi Veg Restaurant,4.2,"3-6-199/1, opp. ब्रांड फैक्ट्री, AP State Housing Board, Himayatnagar, Hyderabad, Telangana 500029",040 6699 4766,17.4011041,78.4537587
+Minerva Coffee Shop,3.9,"3-6-14/3-5, Himayat Nagar Rd, Chandra Nagar, Basheer Bagh, Hyderabad, Telangana 500029",Find a table,17.4011041,78.4537587
+Masala Republic,,"5-10-173, VASANTHA CHAMBERS, Fateh Maidan Lane, Band Colony, Basheer Bagh, Hyderabad, Telangana 500004",Find a table,17.4011041,78.4537587
