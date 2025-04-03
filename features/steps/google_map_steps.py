@@ -1,7 +1,9 @@
+import playwright
 from behave import *
 import re
 import pandas as pd
 from playwright.sync_api import sync_playwright
+
 
 playwright_start = sync_playwright().start()
 browser = playwright_start.chromium.launch(headless=False)
@@ -67,14 +69,14 @@ def open_first_one(context):
                 details["longuitude"] = get_coordinates()[1]
 
                 result_list.append(details)
-                for_timeout(3000)
+                for_timeout(2000)
                 element+=1
             else:
                 page.locator(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]").scroll_into_view_if_needed()
-
+                for_timeout(3000)
 
         dataframe = pd.DataFrame(result_list)
         dataframe.to_csv("restaurants_details.csv", index=False)
 
-    except Exception as e:
-            print(f"Error occured: {e}")
+    except playwright._impl._errors.TimeoutError as msg:
+         print(msg)
