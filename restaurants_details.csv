@@ -1,22 +1,22 @@
-name,rating,location,number,lattitude,longuitude
-La Milano Pizzeria,4.2,"Shop No 2A, Sri Sai Mithai Mansion, 3-6-431, Devi Laxmi Bagh, Domalguda, Himayatnagar, Hyderabad, Telangana 500029",Find a table,17.402841,78.4551937
-La Milano Pizzeria,4.2,"3-5, 815/A, Old MLA Quarters Rd, Avanti Nagar, Himayatnagar, Hyderabad, Telangana 500029",040 2323 7605,17.402841,78.4551937
-Cafe Bahar,4.2,"Anasuya Complex, Ground Floor, 3-6-10, Liberty Rd, Himayatnagar, Hyderabad, Telangana 500029",086886 46434,17.402841,78.4551937
-Alex's Kitchen,4.0,"3-5-869 To 872, Hyderguda-Basheerbagh Rd, Near Apollo Hospitals, Old MLA Quarters, King Koti, Hyderguda, Hyderabad, Telangana 500029",040 2323 0741,17.402841,78.4551937
-Swathi Veg Restaurant,4.0,"shop no. 3-5-885, B/S Old Mumbai icecream, Rafsa tower, Old MLA Quarters Rd, Vittalwadi, Narayanguda, Hyderabad, Telangana 500029",Find a table,17.402841,78.4551937
-"Huber & Holly – Himayat Nagar, Hyderabad",4.0,"Ground Floor, City Plaza Building, 3-6-614, X Road, Himayatnagar, Hyderabad, Telangana 500029",096037 77742,17.402841,78.4551937
-Santosh Family Dhaba (JALSA) Himayat nagar,4.0,"Building No. 3-6-276/1 & 277/1 University, Road, Himayatnagar, Hyderabad, Telangana 500029",Find a table,17.402841,78.4551937
-Haiking Restaurant,4.0,"3-6, 99/2, Street Number 19, near vijaya daigonstics, Avanti Nagar, Himayatnagar, Hyderabad, Telangana 500029",040 6655 3885,17.402841,78.4551937
-Mai Ki Rasoi,4.3,"Ground Floor, 3-5, 899, next to Niloufer Cafe, Venkata swamy Nagar, Himayatnagar, Hyderabad, Telangana 500028",Find a table,17.402841,78.4551937
-Leon's Burgers & Wings Himayat Nagar,,"3-6-562/2, Himayat Nagar Rd, Himayatnagar, Hyderabad, Telangana 500029",Find a table,17.402841,78.4551937
-Govind Dosas,3.7,"5-10-173, VASANTHA CHAMBERS, Fateh Maidan Lane, Band Colony, Basheer Bagh, Hyderabad, Telangana 500004",Find a table,17.402841,78.4551937
-Ishtaa - Vegetarian Cuisine | Basheerbagh,,"LR Plaza, beside Bharat Petrol Pump, Old MLA Quarters, King Koti, Basheer Bagh, Hyderguda, Hyderabad, Telangana 500025",090001 96084,17.402841,78.4551937
-Veggie Chinese,4.2,"1st Floor, Pooja Manor Building, 3-5-908/1, Himayat Nagar Rd, above AU Small Finance Bank, opp. Shanti TVS, Venkata swamy Nagar, Narayanguda, Hyderabad, Telangana 500029",093989 99754,17.402841,78.4551937
-Aromas Of Golconda,4.8,"3-6 111, 8, Himayat Nagar Rd, AP State Housing Board, Himayatnagar, Hyderabad, Telangana 500029",Find a table,17.402841,78.4551937
-A Bleu Basil,4.0,"Hira Mansion 5-9-29G, Palace Colony Rd, opp. Paigah Plaza, Basheer Bagh, Hyderabad, Telangana 500063",Find a table,17.402841,78.4551937
-Chung Hua Restaurant,4.2,"3-6-199/1, opp. ब्रांड फैक्ट्री, AP State Housing Board, Himayatnagar, Hyderabad, Telangana 500029",040 6699 4766,17.402841,78.4551937
-Minerva Coffee Shop,4.2,"H.No.6-1-45/11, A&B, Sai Baba Street, opp. Telephone Bhavan Road, Ambedkar Colony, Lakdikapul, Hyderabad, Telangana 500004",095533 32599,17.402841,78.4551937
-Poorna Hotel,4.0,"3-6-342, Main Rd, Avanti Nagar, Basheer Bagh, Hyderabad, Telangana 500029",040 2322 4431,17.402841,78.4551937
-Mohini Restaurant,4.7,"H.NO.8, 2-674/B/3/2A, Road No. 12, Sri Ram Nagar Colony, Banjara Hills, Hyderabad, Telangana 500034",Find a table,17.402841,78.4551937
-Hummus House - Hyderabad,4.7,"H.NO.8, 2-674/B/3/2A, Road No. 12, Sri Ram Nagar Colony, Banjara Hills, Hyderabad, Telangana 500034",099487 21721,17.402841,78.4551937
-Snehitha Restaurant,4.3,"Ambedkar Nagar, Masab Tank, Hyderabad, Telangana 500028",040 2930 1114,17.4077514,78.4778688
+,name,rating,location,number,lattitude,longuitude
+0,Janata Tawa & Grill,4.2,"Shop no 1, 2.3.4.and.6, Lal Bahadur Shastri Marg, near new Noor hospital, next to Salman chamber building, Friends Colony, Kurla West, Kurla, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+1,Persian Darbar,4.2,"Shop no, Kanakia Zillion, 17, Lal Bahadur Shastri Marg, Kurla West, Kurla, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+2,Delhi Zaika,3.9,"Lal Bahadur Shastri Marg, near fauzia hospital, opposite Sahara hotel, Friends Colony, Kurla West, Kurla, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+3,Delhi Zaika,3.9,"Lal Bahadur Shastri Marg, near fauzia hospital, opposite Sahara hotel, Friends Colony, Kurla West, Kurla, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+4,Delhi Zaika,3.9,"Lal Bahadur Shastri Marg, near fauzia hospital, opposite Sahara hotel, Friends Colony, Kurla West, Kurla, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+5,Serai family Skydine,,"Shop No.3, New Bharat Compound, Lal Bahadur Shastri Marg, near Kalpana cinema, Friends Colony, Kurla West, Kurla, w, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+6,Mughal Dhaba,4.0,"Shop No 3, Lal Bahadur Shastri Marg, near Ansari Weight Bridge, opp. Sai Kutir Cooperative Society Limited, Kurla West, Kurla, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+7,Mughal Dhaba,4.0,"Shop No 3, Lal Bahadur Shastri Marg, near Ansari Weight Bridge, opp. Sai Kutir Cooperative Society Limited, Kurla West, Kurla, Mumbai, Maharashtra 400070",088500 59571,19.0768552,72.8727783
+8,Cafe Amber,4.2,"Shop no 1 & 2, Radhabai Niwas, LBS Road, Junction Of, CST Road, below New Noor Hospital, Kurla West, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+9,Yasin's Food Inn - kurla,4.6,"Shop no 1 & 2, Radhabai Niwas, LBS Road, Junction Of, CST Road, below New Noor Hospital, Kurla West, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+10,Istanbul Darbar,4.4,"216, Lal Bahadur Shastri Marg, Kurla West, Kurla, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+11,Shalimar Restaurant - Branch of Bhendi Bazar,4.0,"216, Lal Bahadur Shastri Marg, Kurla West, Kurla, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+12,Alibaba (Arabian Kasbah) Family Restaurant,4.6,"shop no.4/5, Iconic Residency, Lal Bahadur Shastri Marg, near Kurla depot, next to Deluxe Restaurant, Ambedkar Nagar, Kurla, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+13,Alibaba (Arabian Kasbah) Family Restaurant,4.6,"shop no.4/5, Iconic Residency, Lal Bahadur Shastri Marg, near Kurla depot, next to Deluxe Restaurant, Ambedkar Nagar, Kurla, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+14,Golden Dhaba,4.0,"New Bharat Compound, Lal Bahadur Shastri Marg, near Kalpana Talkies, next to HP Petrol Pump, Friends Colony, Kurla West, Kurla, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+15,Al Zaika Dhaba Kurla,4.0,"Plot no, 169, Lal Bahadur Shastri Marg, beside kalpana theatre, Friends Colony, Kurla West, Kurla, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+16,Shalimar Restaurant & Store,4.0,"New Mill Rd, opp. Habib Hospital, Friends Colony, Kurla West, Kurla, Mumbai, Maharashtra 400070",093209 94411,19.0768552,72.8727783
+17,New Lucky Restaurant,3.8,"Kurla West, Lal Bahadur Shastri Marg, Bail Bajar, Saki Naka, Mumbai, Maharashtra 400070",092203 08967,19.0768552,72.8727783
+18,Bombay Darbar,4.1,"56, Kurla W, Friends Colony, Kurla West, Kurla, Mumbai, Maharashtra 400070",090291 73444,19.0768552,72.8727783
+19,Food Quarter,4.7,"Anjuman Masjid, Santacruz – Chembur Link Rd, near Masrani Estate service road, Kurla West, Mumbai, Maharashtra 400070",Find a table,19.0768552,72.8727783
+20,ARABIAN MANDI HOUSE,4.3,"Jai Ambika Nagar, Hallow Pul, Kurla, Mumbai, Maharashtra 400070",084336 25907,19.0768552,72.8727783

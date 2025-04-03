@@ -22,7 +22,7 @@ def for_timeout(a):
 def get_details(selectors):
     details = {}
     for key, selector in selectors.items():
-        element = page.wait_for_selector(selector)
+        element = page.locator(selector)
         details[key] = element.text_content()
     return details
 
@@ -45,9 +45,9 @@ def open_google_maps(context):
 
 @When('User search for nearest Restaurants')
 def search_nearest_restaurant(context):
-    search_bar = page.wait_for_selector("//input[@role='combobox']")
+    search_bar = page.locator("//input[@role='combobox']")
     search_bar.type("nearest Restaurants")
-    search_button = page.wait_for_selector("//button[@id='searchbox-searchbutton']")
+    search_button = page.locator("//button[@id='searchbox-searchbutton']")
     search_button.click()
     for_timeout(3000)
 
@@ -57,26 +57,26 @@ def open_first_one(context):
     result_list = []
     element = 1
 
-    try:
-        while len(result_list) <= 20:
-            restaurant_container = page.locator(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]")
+    while len(result_list) <= 20:
+        restaurant_container = page.locator(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]")
 
-            # page.wait_for_selector(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]").click()
-            if restaurant_container.is_visible():
-                restaurant_container.click()
+        if restaurant_container.is_visible():
+            restaurant_container.click()
+            if page.locator(Locators["number"]).is_visible():
                 details = get_details(Locators)
                 details["lattitude"] = get_coordinates()[0]
                 details["longuitude"] = get_coordinates()[1]
 
                 result_list.append(details)
                 for_timeout(2000)
-                element+=1
+                element += 1
             else:
-                page.locator(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]").scroll_into_view_if_needed()
-                for_timeout(3000)
+                page.keyboard.press("PageDown")
+        else:
+            page.keyboard.press("PageDown")
+            for_timeout(5000)
+    print(result_list)
+    dataframe = pd.DataFrame(result_list)
+    dataframe.to_csv("restaurants_details.csv", index=True)
 
-        dataframe = pd.DataFrame(result_list)
-        dataframe.to_csv("restaurants_details.csv", index=False)
 
-    except playwright._impl._errors.TimeoutError as msg:
-         print(msg)
