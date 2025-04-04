@@ -57,7 +57,7 @@ def open_first_one(context):
     result_list = []
     element = 1
 
-    while len(result_list) <= 20:
+    while len(result_list) < 25:
         restaurant_container = page.locator(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]")
 
         if restaurant_container.is_visible():
