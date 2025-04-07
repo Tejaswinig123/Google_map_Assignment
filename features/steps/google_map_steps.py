@@ -10,10 +10,10 @@ browser = playwright_start.chromium.launch(headless=False)
 tab = browser.new_context(viewport={ 'width': 1890, 'height': 920 })
 page = tab.new_page()
 
-Locators={"name":"(//div[@role='tablist']//preceding::h1)[3]",
-          "rating":"((//div[@role='tablist']//preceding::h1)[3]//following::span)[4]",
-          "location":"((//span[@class='google-symbols PHazN'])[1]//following::div)[2]",
-          "number":"(//span[@class='google-symbols NhBTye PHazN']//following::div)[2]"
+Locators={"Name":"(//div[@role='tablist']//preceding::h1)[3]",
+          "Rating":"((//div[@role='tablist']//preceding::h1)[3]//following::span)[4]",
+          "Location":"((//span[@class='google-symbols PHazN'])[1]//following::div)[2]",
+          "Number":"(//span[@class='google-symbols NhBTye PHazN']//following::div)[2]"
 }
 
 def for_timeout(a):
@@ -56,16 +56,25 @@ def search_nearest_restaurant(context):
 def open_first_one(context):
     result_list = []
     element = 1
+    visited_urls=set()
 
-    while len(result_list) < 25:
+    while len(result_list) < 30:
         restaurant_container = page.locator(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]")
 
         if restaurant_container.is_visible():
             restaurant_container.click()
-            if page.locator(Locators["number"]).is_visible():
+
+            current_url=page.url
+
+            if current_url in visited_urls:
+                page.keyboard.press("PageDown")
+                continue
+            visited_urls.add(current_url)
+
+            if page.locator(Locators["Number"]).is_visible():
                 details = get_details(Locators)
-                details["lattitude"] = get_coordinates()[0]
-                details["longuitude"] = get_coordinates()[1]
+                details["Lattitude"] = get_coordinates()[0]
+                details["Longuitude"] = get_coordinates()[1]
 
                 result_list.append(details)
                 for_timeout(2000)
@@ -77,6 +86,6 @@ def open_first_one(context):
             for_timeout(5000)
     print(result_list)
     dataframe = pd.DataFrame(result_list)
-    dataframe.to_csv("restaurants_details.csv", index=True)
+    dataframe.to_csv("restaurants_details.csv", index=False)
 
 
