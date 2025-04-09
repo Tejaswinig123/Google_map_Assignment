@@ -25,8 +25,8 @@ def for_PageLoad(locator,max_time):
         if page.locator(locator).is_visible():
             break
         running_time= (int(round(time.time() * 1000))) // 1000
-        if running_time-start_time>max_time:
-            raise Exception(f"Page took more than {max_time} seconds to load without latitude and longitude in the URL.")
+        if running_time-start_time > max_time:
+            raise Exception(f"Page took more than {max_time} seconds to load without showing next object")
         time.sleep(1)
 
 def get_details(selectors):
