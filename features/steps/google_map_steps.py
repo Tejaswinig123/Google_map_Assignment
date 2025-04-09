@@ -1,9 +1,9 @@
 import playwright
 from behave import *
 import re
+import time
 import pandas as pd
 from playwright.sync_api import sync_playwright
-
 playwright_start = sync_playwright().start()
 browser = playwright_start.chromium.launch(headless=False)
 tab = browser.new_context(viewport={ 'width': 1890, 'height': 920 })
@@ -19,8 +19,15 @@ Locators={"Name":"(//div[@role='tablist']//preceding::h1)[3]",
           "Number":"((//span[text()=''])[1]//following::div)[2]"
 }
 
-def for_timeout(a):
-    page.wait_for_timeout(a)
+def for_PageLoad(locator,max_time):
+    start_time = (int(round(time.time() * 1000))) // 1000
+    while True:
+        if page.locator(locator).is_visible():
+            break
+        running_time= (int(round(time.time() * 1000))) // 1000
+        if running_time-start_time>max_time:
+            raise Exception(f"Page took more than {max_time} seconds to load without latitude and longitude in the URL.")
+        time.sleep(1)
 
 def get_details(selectors):
     details = {}
@@ -28,7 +35,6 @@ def get_details(selectors):
         element = page.locator(selector).text_content().replace(" ","")
         details[key]=element
     return details
-
 
 def get_coordinates():
     match = re.search(r"@(-?\d+\.\d+),(-?\d+\.\d+)", page.url)
@@ -41,44 +47,36 @@ def get_coordinates():
 
 @Given('User open Google map Application')
 def open_google_maps(context):
-    page.goto('https://www.google.com/maps')
-    for_timeout(3000)
+    page.goto(application_url)
+    for_PageLoad(" //div[@id='passive-assist']",60)
 
 @When('User search for nearest Restaurants')
 def search_nearest_restaurant(context):
     page.locator(input_locator).type("nearest Restaurants")
     page.locator(button_locator).click()
-    for_timeout(3000)
+    for_PageLoad("(//div[@class='Nv2PK THOPZb CpccDe '])[1]",30)
 
 @Then('User should able to open and get the details of each Restaurant')
 def open_first_one(context):
     result_list = []
     element = 1
-    visited_urls=set()
-
     while len(result_list) < 20:
         restaurant_container = page.locator(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]")
-
         if restaurant_container.is_visible():
             restaurant_container.click()
-
-            current_url=page.url
-            if current_url in visited_urls:
-                continue
-            visited_urls.add(current_url)
-
             if page.locator(Locators["Number"]).is_visible():
                 details = get_details(Locators)
                 details["Lattitude"] = get_coordinates()[0]
                 details["Longuitude"] = get_coordinates()[1]
-
                 result_list.append(details)
+                time.sleep(2)
                 element += 1
             else:
                 page.keyboard.press("PageDown")
+                time.sleep(1)
         else:
             page.keyboard.press("PageDown")
-
+            for_PageLoad(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]", 10)
     dataframe = pd.DataFrame(result_list)
     dataframe.to_csv("restaurants_details.csv", index=False)
 
