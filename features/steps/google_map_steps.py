@@ -65,6 +65,7 @@ def open_first_one(context):
         restaurant_container = page.locator(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]")
         if restaurant_container.is_visible():
             restaurant_container.click()
+            time.sleep(3)
             current_url=page.url
             if current_url in visited_urls:
                 element+=1
