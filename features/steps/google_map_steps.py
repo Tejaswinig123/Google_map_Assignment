@@ -1,95 +1,92 @@
-import csv
+import playwright
 from behave import *
 import re
+import time
+import pandas as pd
 from playwright.sync_api import sync_playwright
-
 playwright_start = sync_playwright().start()
 browser = playwright_start.chromium.launch(headless=False)
-tab = browser.new_context()
+tab = browser.new_context(viewport={ 'width': 1890, 'height': 920 })
 page = tab.new_page()
 
+application_url="https://www.google.com/maps"
+input_locator="//input[@role='combobox']"
+button_locator="//button[@id='searchbox-searchbutton']"
 
-def for_timeout(a):
-    page.wait_for_timeout(a)
+Locators={"Name":"(//div[@role='tablist']//preceding::h1)[3]",
+          "Rating":"((//div[@role='tablist']//preceding::h1)[3]//following::span)[4]",
+          "Location":"((//span[@class='google-symbols PHazN'])[1]//following::div)[2]",
+          "Number":"((//span[text()=''])[1]//following::div)[2]"
+}
 
+def wait_for_PageLoad(locator,max_time):
+    start_time = (int(round(time.time() * 1000))) // 1000
+    while True:
+        if page.locator(locator).is_visible():
+            break
+        running_time= (int(round(time.time() * 1000))) // 1000
+        if running_time-start_time > max_time:
+            raise Exception(f"Page took more than {max_time} seconds to load without showing next object")
+        time.sleep(1)
 
-def name():
-    name = page.wait_for_selector("(//div[@role='tablist']//preceding::h1)[3]").text_content()
-    return name
+def get_details(selectors):
+    details = {}
+    for key, selector in selectors.items():
+        element = page.locator(selector).text_content().replace(" ","")
+        details[key]=element
+    return details
 
-
-def rating():
-    rating = page.wait_for_selector("((//div[@role='tablist']//preceding::h1)[3]//following::span)[4]").text_content()
-    return rating
-
-
-def location():
-    location = page.wait_for_selector("((//span[@class='google-symbols PHazN'])[1]//following::div)[2]").text_content()
-    return location
-
-
-def number():
-    number = page.wait_for_selector("(//span[@class='google-symbols NhBTye PHazN']//following::div)[2]").text_content()
-    return number
-
-
-def lattitude():
-    match = re.search(r"@(-?\d+\.\d+),(-?\d+\.\d+)",
-                      "https://www.google.com/maps/place/Maryada+Ramanna+Multi+Cusine+Restaurant/@17.4581993,78.3670023,17z/data=!3m1!5s0x3bcb93cfc6f689b7:0x73d2f8bd060bc177!4m10!1m2!2m1!1snearest+restaurants!3m6!1s0x3bcb93cbb1ff856d:0xf03169e4a2bff485!8m2!3d17.4581993!4d78.3715084!15sChNuZWFyZXN0IHJlc3RhdXJhbnRzIgOQAQFaFSITbmVhcmVzdCByZXN0YXVyYW50c5IBF3NvdXRoX2luZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F11n6rglg76?entry=ttu&g_ep=EgoyMDI1MDMyNC4wIKXMDSoASAFQAw%3D%3D")
+def get_coordinates():
+    match = re.search(r"@(-?\d+\.\d+),(-?\d+\.\d+)", page.url)
     if match:
         latitude = match.group(1)
-        return latitude
-    else:
-        return "Could not find latitude in the URL."
-
-
-def longitude():
-    match = re.search(r"@(-?\d+\.\d+),(-?\d+\.\d+)",
-                      "https://www.google.com/maps/place/Maryada+Ramanna+Multi+Cusine+Restaurant/@17.4581993,78.3670023,17z/data=!3m1!5s0x3bcb93cfc6f689b7:0x73d2f8bd060bc177!4m10!1m2!2m1!1snearest+restaurants!3m6!1s0x3bcb93cbb1ff856d:0xf03169e4a2bff485!8m2!3d17.4581993!4d78.3715084!15sChNuZWFyZXN0IHJlc3RhdXJhbnRzIgOQAQFaFSITbmVhcmVzdCByZXN0YXVyYW50c5IBF3NvdXRoX2luZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F11n6rglg76?entry=ttu&g_ep=EgoyMDI1MDMyNC4wIKXMDSoASAFQAw%3D%3D")
-    if match:
         longitude = match.group(2)
-        return longitude
+        return latitude, longitude
     else:
-        return "Could not find longitude in the URL."
+        return "Could not find latitude and longitude"
 
-
-@Given('The Google Map Application is open')
+@Given('User open Google map Application')
 def open_google_maps(context):
-    page.goto("https://www.google.com/maps")
-    for_timeout(3000)
+    page.goto(application_url)
+    wait_for_PageLoad(" //div[@id='passive-assist']",60)
 
-
-@When('I search for nearest Restaurants')
+@When('User search for nearest Restaurants')
 def search_nearest_restaurant(context):
-    search_bar = page.wait_for_selector("//input[@role='combobox']")
-    search_bar.type("nearest Restaurants")
-    search_button = page.wait_for_selector("//button[@id='searchbox-searchbutton']")
-    search_button.click()
-    for_timeout(3000)
+    page.locator(input_locator).type("nearest Restaurants")
+    page.locator(button_locator).click()
+    wait_for_PageLoad("(//div[@class='Nv2PK THOPZb CpccDe '])[1]",30)
 
-
-@Then('I should able to open and get the details of each Restaurant')
+@Then('User should able to open and get the details of each Restaurant')
 def open_first_one(context):
-    # Open or create a CSV file to write the data
-    with open("restaurants_details.csv", mode="w", newline="") as file:
-        writer = csv.writer(file)
+    result_list = []
+    element = 1
+    visited_urls=[]
+    while len(result_list) < 20:
+        restaurant_container = page.locator(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]")
+        if restaurant_container.is_visible():
+            restaurant_container.click()
+            time.sleep(3)
+            current_url=page.url
+            if current_url in visited_urls:
+                element+=1
+                continue
+            visited_urls.append(current_url)
 
-        # Write headers to the CSV file
-        writer.writerow(['Name', 'Rating', 'Location', 'Number', 'Latitude', 'Longitude'])
+            if page.locator(Locators["Number"]).is_visible():
+                details = get_details(Locators)
+                details["Lattitude"] = get_coordinates()[0]
+                details["Longuitude"] = get_coordinates()[1]
+                result_list.append(details)
+                time.sleep(2)
+                element += 1
+            else:
+                page.keyboard.press("PageDown")
+                time.sleep(1)
+        else:
+            page.keyboard.press("PageDown")
+            wait_for_PageLoad(f"(//div[@class='Nv2PK THOPZb CpccDe '])[{element}]", 10)
+        print(result_list)
+    dataframe = pd.DataFrame(result_list)
+    dataframe.to_csv("restaurants_details.csv", index=False)
 
-        for i in range(5):
-            element = 1
-            for i in range(21):
-                page.wait_for_selector(f"((//span[text()='Share'])[1]//following::a){[element]}").click()
-                if page.query_selector("//div[text() = 'Reserve a table']").is_visible:
-                    page.wait_for_timeout(3000)
-                    element += 2
-                    # Write each restaurant's data into the CSV file
-                    writer.writerow([name(), rating(), location(), number(), lattitude(), longitude()])
-                else:
-                    element += 1
-                    # Write each restaurant's data into the CSV file
-                    writer.writerow([name(), rating(), location(), number(), lattitude(), longitude()])
-
-    print("Data written to restaurants_details.csv")
 
